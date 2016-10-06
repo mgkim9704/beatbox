@@ -76,21 +76,21 @@
         document.getElementById(volume_label_id[i]).innerHTML = 'Volume:  ' + vol + 'dB'; 
     }
     var kick = new XMLHttpRequest();
-    kick.open("Get","test.wav",true);   //  <---- replace this file with yours
+    kick.open("Get","kick.wav",true);   //  <---- replace this file with yours
     kick.responseType = "arraybuffer";
     kick.onload = function(){
         context.decodeAudioData(kick.response, function(buffer){buffers[0] = buffer;});
     }
     kick.send();
     var snare = new XMLHttpRequest();
-    snare.open("Get","test.wav",true);  //  <---- replace this file with yours
+    snare.open("Get","snare.wav",true);  //  <---- replace this file with yours
     snare.responseType = "arraybuffer";
     snare.onload = function(){
         context.decodeAudioData(snare.response, function(buffer){buffers[1] = buffer;});
     }
     snare.send();
     var hihat = new XMLHttpRequest();
-    hihat.open("Get","test.wav",true);  //  <---- replace this file with yours
+    hihat.open("Get","hihat.wav",true);  //  <---- replace this file with yours
     hihat.responseType = "arraybuffer";
     hihat.onload = function(){
         context.decodeAudioData(hihat.response, function(buffer){buffers[2] = buffer;});
@@ -119,7 +119,7 @@
         gain_nodes[i].gain.value = db2gain(changedvalue);
         document.getElementById(volume_label_id[i]).innerHTML = 'Volume:  ' + changedvalue + 'dB'; 
     }
-    //µ¥½Ãº§À» °ÔÀÎÀ¸·Î ¹Ù²Ù´Â ¼ö½Ä.
+    //ë°ì‹œë²¨ì„ ê²Œì¸ìœ¼ë¡œ ë°”ê¾¸ëŠ” ìˆ˜ì‹.
     function db2gain(db_gain) {
         var gain = 1.0;
         //
