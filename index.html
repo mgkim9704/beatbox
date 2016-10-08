@@ -105,13 +105,12 @@
         }, false);
     }
     function playdrum(i) {
-    		source = context.createBufferSource();
-    		source.buffer = buffers[i] ;
-    		source.connect(context.destination);
-    		source.start();
         //
         //
-        // fill out this funciton
+    	source = context.createBufferSource();
+    	source.buffer = buffers[i] ;
+    	source.connect(context.destination);
+    	source.start();
         //
         //
     }
@@ -119,12 +118,12 @@
         gain_nodes[i].gain.value = db2gain(changedvalue);
         document.getElementById(volume_label_id[i]).innerHTML = 'Volume:  ' + changedvalue + 'dB'; 
     }
-    //데시벨을 게인으로 바꾸는 수식.
+
     function db2gain(db_gain) {
         var gain = 1.0;
         //
         //
-        // fill out this funciton
+        gain = Math.pow(10,db_gain/20) ;
         //
         //
         return gain
