@@ -37,6 +37,11 @@
         height:600px;
         float:left;
     }
+    #reverse_cymbal{
+        width:130px;
+        height:600px;
+        float:left;
+    }
     input.volume {
         width:120px;
         height:10px;
@@ -62,14 +67,19 @@
     <p id="hihatVolLabel"></p>
     <input class="volume" onchange="changegain(2,this.value)" id="hihatVol" title="Hihat volume" type="range" min="-24" max ="0" value = "-12">
 </div>
+<div id = "reverse_cymbal" align = "center">
+    <button id="reverse_cymbalPad" onmousedown="playdrum(3)"> Hihat ('p' key)</button>
+    <p id="reverse_cymbalVolLabel"></p>
+    <input class="volume" onchange="changegain(3,this.value)" id="reverse_cymbalVol" title="reverse_cymbal volume" type="range" min="-24" max ="0" value = "-12">
+</div>
 
 <script>
     var context = new (window.AudioContext || window.webkitAudioContext)();
-    var buffers = new Array(3); // 0 : kick, 1 : snare, 2 : hihat
-    var volume_id = new Array("kickVol","snareVol","hihatVol");
-    var volume_label_id = new Array("kickVolLabel","snareVolLabel","hihatVolLabel");
-    var gain_nodes = new Array(3);
-    for (i  = 0; i < 3; i++) {
+    var buffers = new Array(4); // 0 : kick, 1 : snare, 2 : hihat, 3 : reverse_cymbal
+    var volume_id = new Array("kickVol","snareVol","hihatVol","reverse_cymbal");
+    var volume_label_id = new Array("kickVolLabel","snareVolLabel","hihatVolLabel","reverse_cymbalLabel");
+    var gain_nodes = new Array(4);
+    for (i  = 0; i < 4; i++) {
         gain_nodes[i] = context.createGain();
         var vol = document.getElementById(volume_id[i]).value;
         gain_nodes[i].gain.value = db2gain(vol);
@@ -96,6 +106,13 @@
         context.decodeAudioData(hihat.response, function(buffer){buffers[2] = buffer;});
     }
     hihat.send();
+    var reverse_cymbal = new XMLHttpRequest();
+    reverse_cymbal.open("Get","reverse_cymbal.wav",true);  //  <---- replace this file with yours
+    reverse_cymbal.responseType = "arraybuffer";
+    reverse_cymbal.onload = function(){
+        context.decodeAudioData(reverse_cymbal.response, function(buffer){buffers[3] = buffer;});
+    }
+    reverse_cymbal.send();
     window.onload=function(){
         window.addEventListener('keydown', function (key) {
             keyboardDown(key);
@@ -150,6 +167,11 @@
                 hihatpad.className = 'active';
                 simulateClick(hihatpad);
                 break;
+            case 80: //'p'
+                var reverse_cymbalpad = document.getElementById("reverse_cymbalPad"); 
+                reverse_cymbalpad.className = 'active';
+                simulateClick(reverse_cymbalpad);
+                break;
         }
     }
     function keyboardUp(key) {
@@ -165,6 +187,10 @@
             case 76: //'l'
                 var hihatpad = document.getElementById("hihatPad"); 
                 hihatpad.className = '';
+                break;
+            case 80: //'p'
+                var reverse_cymbalpad = document.getElementById("reverse_cymbalPad"); 
+                reverse_cymbalpad.className = '';
                 break;
         }
     }
