@@ -113,7 +113,8 @@
 
     	source = context.createBufferSource();
     	source.buffer = buffers[i] ;
-    	source.connect(context.destination);
+        source.connect(gain_nodes[i]);
+    	gain_nodes.connect(context.destination);
     	source.start();
         //
         //
