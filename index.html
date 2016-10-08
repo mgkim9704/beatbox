@@ -76,8 +76,8 @@
 <script>
     var context = new (window.AudioContext || window.webkitAudioContext)();
     var buffers = new Array(4); // 0 : kick, 1 : snare, 2 : hihat, 3 : reverse_cymbal
-    var volume_id = new Array("kickVol","snareVol","hihatVol","reverse_cymbal");
-    var volume_label_id = new Array("kickVolLabel","snareVolLabel","hihatVolLabel","reverse_cymbalLabel");
+    var volume_id = new Array("kickVol","snareVol","hihatVol","reverse_cymbalVol");
+    var volume_label_id = new Array("kickVolLabel","snareVolLabel","hihatVolLabel","reverse_cymbalVolLabel");
     var gain_nodes = new Array(4);
     for (i  = 0; i < 4; i++) {
         gain_nodes[i] = context.createGain();
