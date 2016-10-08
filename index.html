@@ -105,12 +105,10 @@
         }, false);
     }
     
-    var source = null;
     
     function playdrum(i) {
         //
         //
-
     	source = context.createBufferSource();
     	source.buffer = buffers[i] ;
         source.connect(gain_nodes[i]);
