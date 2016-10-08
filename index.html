@@ -109,11 +109,11 @@
     function playdrum(i) {
         //
         //
-    	source = context.createBufferSource();
+    	var source = context.createBufferSource();
     	source.buffer = buffers[i] ;
         source.connect(gain_nodes[i]);
     	gain_nodes[i].connect(context.destination);
-    	source.start();
+    	source.start(0);
         //
         //
     }
