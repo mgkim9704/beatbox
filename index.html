@@ -107,6 +107,7 @@
     function playdrum(i) {
         //
         //
+        var source = null;
     	source = context.createBufferSource();
     	source.buffer = buffers[i] ;
     	source.connect(context.destination);
